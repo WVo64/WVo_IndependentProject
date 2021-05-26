@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class JumpGravity : MonoBehaviour
 {
-    private float gravity = -9.18f;
+    private float gravity = -18.36f;
 
     public CharacterController controller;
     public Transform groundCheck;
 
 
-    public float jumpHeight = 8f;
-    public float jumpTime;
+    public float jumpHeight = 3f;
+    public float jumpTime = 0.6f;
 
     private float jumpTimeCounter;
 

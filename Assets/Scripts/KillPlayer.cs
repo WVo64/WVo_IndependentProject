@@ -18,7 +18,10 @@ public class KillPlayer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Destroy(other.gameObject);
-        SceneManager.LoadScene(Respawn);
+        if (other.CompareTag("Player"))
+        {
+            Destroy(other.gameObject);
+            SceneManager.LoadScene(Respawn);
+        }
     }
 }
