@@ -6,9 +6,9 @@ public class TPDash : MonoBehaviour
 {
     ThirdPersonMovement moveScript;
 
-    public float dashSpeed;
-    public float dashTime;
-    public float dashCooldown;
+    public float dashSpeed = 30.0f;
+    public float dashTime = 0.25f;
+    public float dashCooldown = 0.6f;
 
     private bool canDash = true;
 
