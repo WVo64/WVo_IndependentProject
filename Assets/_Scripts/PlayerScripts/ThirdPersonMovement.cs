@@ -13,6 +13,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public Transform cam;
 
     private int Respawn;
+    public bool gameOver = false;
+    private float tooFar = 50.0f;
 
     [Header("Player Movement Values")]
     public float speed = 12f;
@@ -22,40 +24,67 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Vector3 moveDir;
 
-    private float tooFar = 50.0f;
+    private Animator dummyPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        dummyPlayer = GameObject.Find("MaleDummy").GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Get horizontal/vertical movement for movement direction
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 dir = new Vector3(h, 0f, v).normalized;
-
-        if (dir.magnitude >= 0.1f)
+        if(!gameOver)
         {
-            // Rotation
-            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            // Get horizontal/vertical movement for movement direction
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            Vector3 dir = new Vector3(h, 0f, v).normalized;
 
-            // Move
-            moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            if (dir.magnitude >= 0.1f)
+            {
+                // Rotation
+                float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                // Move
+                moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            }
         }
         
 
         // Out of Bounds - Die
         if(transform.position.y < -tooFar)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene(Respawn);
+            GameOver();
         }
+    }
+
+    // Touch a "Kill" block [Red] w/ Invuln - Die
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Kill") && gameObject.CompareTag("Player"))
+        {
+            GameOver();
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Kill") && gameObject.CompareTag("Player"))
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("Game Over!");
+        gameOver = true;
+        // Destroy(gameObject);
+
+        //SceneManager.LoadScene(Respawn); [Commenting Out to test gameOver's pause requirement for Phase 3]
     }
 }

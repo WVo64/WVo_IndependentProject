@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    
+    private ThirdPersonMovement TPM;
+
     public GameObject[] platWallPrefabs;
     public float PosRange = 10;
 
@@ -16,14 +17,19 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TPM = GameObject.Find("Player").GetComponent<ThirdPersonMovement>();
+
         InvokeRepeating("SpawnPlatWalls", repeatTime, spawnRate);
     }
 
     void SpawnPlatWalls()
     {
-        int platWallPrefabsIndex = Random.Range(0, platWallPrefabs.Length);
+        if(TPM.gameOver == false)
+        {
+            int platWallPrefabsIndex = Random.Range(0, platWallPrefabs.Length);
 
-       Instantiate(platWallPrefabs[platWallPrefabsIndex], transform.position,
-            platWallPrefabs[platWallPrefabsIndex].transform.rotation);
+            Instantiate(platWallPrefabs[platWallPrefabsIndex], transform.position,
+                 platWallPrefabs[platWallPrefabsIndex].transform.rotation);
+        }
     }
 }
