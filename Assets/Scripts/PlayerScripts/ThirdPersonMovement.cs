@@ -24,12 +24,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Vector3 moveDir;
 
-    private Animator dummyPlayer;
+    private Animator animPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        dummyPlayer = GameObject.Find("MaleDummy").GetComponent<Animator>();
+        animPlayer = GameObject.Find("Distorter").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,7 +52,10 @@ public class ThirdPersonMovement : MonoBehaviour
                 // Move
                 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+                animPlayer.SetFloat("Speed_f", 0.6f);
             }
+            else animPlayer.SetFloat("Speed_f", 0.0f);
         }
         
 

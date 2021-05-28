@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Courtesy of Youtube Video "THIRD PERSON MOVEMENT in Unity" by Brackeys @ May 24, 2020
+// and "FIRST PERSON MOVEMENT in Unity - FPS Controller by Brackeys @ Oct 27, 2019
+// "HOLD JUMP KEY TO JUMP HIGHER - 2D PLATFORMER CONTROLLER - UNITY TUTORIAL by Blackthornprod @ Jul 9, 2018
+
 public class JumpGravity : MonoBehaviour
 {
     private ThirdPersonMovement TPM;
-    private Animator dummyPlayer;
+    private Animator animPlayer;
 
     private float gravity = -18.36f;
 
@@ -28,8 +32,8 @@ public class JumpGravity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TPM = GameObject.Find("Player").GetComponent<ThirdPersonMovement>();
-        dummyPlayer = GameObject.Find("MaleDummy").GetComponent<Animator>();
+        TPM = GameObject.Find("Distorter").GetComponent<ThirdPersonMovement>();
+        animPlayer = GameObject.Find("Distorter").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,11 +55,15 @@ public class JumpGravity : MonoBehaviour
             // Jump
             if (isGrounded && Input.GetKey(KeyCode.Space))
             {
+                // Play Jump Animation ONCE
+                if(isGrounded && Input.GetKeyDown(KeyCode.Space))
+                {
+                    animPlayer.SetTrigger("Jump_trig");
+                }
+                
                 isJumping = true;
                 jumpTimeCounter = jumpTime;
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-
-                dummyPlayer.SetTrigger("Jump_trig");
             }
 
             // Still holding Space while jumping = Higher Jump
