@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TPM = GameObject.Find("Player").GetComponent<ThirdPersonMovement>();
+        TPM = GameObject.Find("Distorter").GetComponent<ThirdPersonMovement>();
 
         InvokeRepeating("SpawnPlatWalls", repeatTime, spawnRate);
     }
