@@ -5,21 +5,22 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private ThirdPersonMovement TPM;
+    private Transform groundSize;
 
     public GameObject[] platWallPrefabs;
-    public float PosRange = 10;
 
-    public float repeatTime = 1.0f;
-    public float spawnRate = 1.0f;
+    public float startTime = 1.0f;
+    public static float spawnRate = 5.0f;
+    public int difficultyLevel = 0;
 
-    public float speed = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         TPM = GameObject.Find("Player").GetComponent<ThirdPersonMovement>();
+        groundSize = GameObject.Find("Ground").GetComponent<Transform>();
 
-        InvokeRepeating("SpawnPlatWalls", repeatTime, spawnRate);
+        InvokeRepeating("SpawnPlatWalls", startTime, spawnRate);
     }
 
     void SpawnPlatWalls()
@@ -28,8 +29,15 @@ public class SpawnManager : MonoBehaviour
         {
             int platWallPrefabsIndex = Random.Range(0, platWallPrefabs.Length);
 
-            Instantiate(platWallPrefabs[platWallPrefabsIndex], transform.position,
-                 platWallPrefabs[platWallPrefabsIndex].transform.rotation);
+            Instantiate(platWallPrefabs[platWallPrefabsIndex], randomPos(),
+                 gameObject.transform.rotation);
         }
+    }
+
+    Vector3 randomPos()
+    {
+        float spawnHalf = groundSize.localScale.x / 2;
+        float randSpawn = Random.Range(-groundSize.localScale.x + spawnHalf, groundSize.localScale.x - spawnHalf);
+        return new Vector3(randSpawn, transform.position.y, transform.position.z);
     }
 }

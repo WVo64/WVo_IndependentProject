@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8156296538798625350}
   - component: {fileID: 8156296538798625349}
+  - component: {fileID: -8212902551015139045}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -48,7 +49,19 @@ MonoBehaviour:
   - {fileID: 46386505880354063, guid: c0305220693f964408c59e3fe3ba4f26, type: 3}
   - {fileID: 7031218341321086370, guid: 3541dbfd8e28c3143bfe55ccf3cb8e94, type: 3}
   - {fileID: 46386505880354063, guid: f0117e210ddbce545a1d5955e36a62b0, type: 3}
-  PosRange: 10
-  repeatTime: 1
-  spawnRate: 1
-  speed: 10
+  startTime: 2
+  difficultyLevel: 0
+--- !u!114 &-8212902551015139045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156296538798625348}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84222ae4acf61144961f9e3aacb0503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moreSpawns: {fileID: 8156296538798625348}
+  level: 0

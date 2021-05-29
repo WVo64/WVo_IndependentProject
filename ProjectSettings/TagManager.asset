@@ -8,6 +8,7 @@ TagManager:
   - Invuln
   - Kill
   - Body
+  - Goal
   layers:
   - Default
   - TransparentFX

@@ -789,7 +789,7 @@ CharacterController:
   m_GameObject: {fileID: 1615785655958178365}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 3
   m_Radius: 0.6
@@ -805,7 +805,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615785655958178365}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee6c7bcc64615254d85ec101c76f5ed9, type: 3}
   m_Name: 
@@ -817,6 +817,7 @@ MonoBehaviour:
   speed: 12
   turnSmoothTime: 0.1
   moveDir: {x: 0, y: 0, z: 0}
+  deathSound: {fileID: 0}
 --- !u!114 &1615785655878362338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,7 +825,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615785655958178365}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ed3214c43649d0469f843c9f9b7695c, type: 3}
   m_Name: 
@@ -837,6 +838,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  jumpSound: {fileID: 0}
 --- !u!114 &1615785655878362141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +846,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615785655958178365}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fea1061d1d0caf4fbc60d92c789dedb, type: 3}
   m_Name: 
@@ -852,6 +854,7 @@ MonoBehaviour:
   dashSpeed: 30
   dashTime: 0.25
   dashCooldown: 0.6
+  dashSound: {fileID: 0}
 --- !u!1 &1615785655958178393
 GameObject:
   m_ObjectHideFlags: 0

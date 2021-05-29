@@ -13,12 +13,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public Transform cam;
     public ParticleSystem expSystem;
 
-    private int Respawn;
     public bool gameOver = false;
-    private float tooFar = 50.0f;
+    private float tooFar = -50.0f;
+    public static int wonLevels = 0;
 
     [Header("Player Movement Values")]
-    public float speed = 12f;
+    public float speed = 10f;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -66,9 +66,9 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         // Out of Bounds - Die
-        if(transform.position.y < -tooFar)
+        if(transform.position.y < tooFar)
         {
-            GameOver();
+            Death();
         }
     }
 
@@ -77,18 +77,24 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Kill") && gameObject.CompareTag("Player"))
         {
-            GameOver();
+            Death();
+        }
+        // Win Condition Met
+        else if(other.gameObject.CompareTag("Goal"))
+        {
+            wonLevels++;
+            SceneManager.LoadScene("PlayGame");
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Kill") && gameObject.CompareTag("Player"))
         {
-            GameOver();
+            Death();
         }
     }
 
-    void GameOver()
+    void Death()
     {
         // If the death explosion isn't already playing.
         if (expSystem.isPlaying == false && GameObject.FindWithTag("Body") != null)
@@ -97,11 +103,10 @@ public class ThirdPersonMovement : MonoBehaviour
             expSystem.Play();
             asPlayer.PlayOneShot(deathSound);
         }
+
         Debug.Log("Game Over!");
 
-        gameOver = true;
+            gameOver = true;
         Destroy(GameObject.Find("Distorter"));
-
-        //SceneManager.LoadScene(Respawn); [Commenting Out to test gameOver's pause requirement for Phase 3]
     }
 }

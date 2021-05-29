@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyTooFar : MonoBehaviour
 {
-    private float tooFar = 150.0f;
+    public float tooFar = 600.0f;
 
     // Start is called before the first frame update
     void Start()

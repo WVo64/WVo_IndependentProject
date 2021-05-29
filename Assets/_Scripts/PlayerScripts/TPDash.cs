@@ -37,7 +37,7 @@ public class TPDash : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        Debug.Log("Player Again");
+        //Debug.Log("Player Again");
         gameObject.tag = "Player";
     }
 
@@ -55,13 +55,13 @@ public class TPDash : MonoBehaviour
             animPlayer.SetBool("Dash", true);
 
             gameObject.tag = "Invuln";
-            Debug.Log("Invulnerable");
+            //Debug.Log("Invulnerable");
 
             yield return null;
         }
         animPlayer.SetBool("Dash", false);
 
-        yield return new WaitForSeconds(dashCooldown);        
+        yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 }
